@@ -70,11 +70,11 @@ def view_expense_tab():
     if st.button("Fetch Records"):
         url = f"{BASE_URL}/expenses/{expense_date}"
         resp = requests.get(url)
-
-        data = resp.json()
-
-        if isinstance(data, dict) and "message" in data:
-            st.warning(data["message"])
+        try:
+            data = resp.json()
+        except: 
+            st.error("❌ Server returned non-JSON response")
+            st.write("Raw response:", resp.text)
             return
 
         st.table(data)

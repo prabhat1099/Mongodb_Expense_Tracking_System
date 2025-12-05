@@ -4,6 +4,7 @@ from typing import List
 from pydantic import BaseModel
 import db_helper
 from logging_setup import setup_logger
+from fastapi.responses import JSONResponse
 
 logger = setup_logger("server_logger")
 
@@ -34,9 +35,9 @@ async  def get_expenses(expense_date: date):
 
     except Exception as e:
         logger.error(str(e))
-        raise HTTPException (500, f"DB Error : {str(e)}")
+        return JSONResponse(status_code=500, content={"error": f"DB Error: {str(e)}"})
     if not  expenses :
-        raise HTTPException(404, "No expenses found")
+         return JSONResponse(status_code=404, content={"message": "No expenses found"})
     return expenses
 
 # ---------------------------------------
