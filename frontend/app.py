@@ -2,7 +2,9 @@ import streamlit as st
 import requests
 from datetime import date
 
-BASE_URL = "http://localhost:8000"   # change to your deployed API
+#BASE_URL = "http://localhost:8000"   # change to your deployed API
+
+BASE_URL = "https://expense-tracking-app-33it.onrender.com"   # change to your deployed API
 
 
 # ---------------------------------------------------------
